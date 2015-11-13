@@ -1,0 +1,4 @@
+This problem is quite specific, half dynamic programming, half greedy.
+The key point is restart a search for max value when sum < 0 i.e.: there is no meaning searching a maximum sum at a negative amount.
+One important thing is: we need to keep track of the current start point and current end point, in order to compare them later (to break ties). 
+We can do this in many ways, there exist many "costo" ways, but we can always do with just two additional ints.
