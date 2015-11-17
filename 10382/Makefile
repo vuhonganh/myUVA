@@ -4,7 +4,8 @@ CC = g++
 CXXFLAGS = -g -std=c++11 -Wall
 
 
-SRCS = $(wildcard *.cpp)
+#SRCS = $(wildcard *.cpp)
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 EXE = main
 

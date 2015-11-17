@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cassert>
 
-#define eps 0.000001
+#define eps 0.000000001
 using namespace std;
 
 struct interval
@@ -18,9 +18,11 @@ struct interval
   int id;
   bool operator<(const interval & a) const
   {
-    return ((left < a.left) || ( abs(left - a.left) < eps && right > a.right));
+    //return ((left < a.left) || ( abs(left - a.left) < eps && right > a.right));
+    return left < a.left;
   }
 };
+
 
 int main()
 {
@@ -30,89 +32,66 @@ int main()
   
   int x; //position 
   int r; //radius
-  double dx = 0.0; 
+ 
   vector<interval> arrIntv;
   
   bool debug = false;
-  // bool debug = true;
-  bool feasible;
-  vector<int> res; //number of minimum sprinklers need to be turned on
-  double rightMost;
-  double lastRightMost;
-  int curId; //keep track of the rightMost interval
+  //bool debug = true;
+
+
   while (scanf("%d %d %d", &n, &l, &w) == 3)
     {
       if (!arrIntv.empty()) arrIntv.clear();
       for (int i = 0; i < n; ++i)
 	{
 	  assert(scanf("%d %d", &x, &r) == 2);
-	  dx = sqrt(r * r - w * w * 0.25);
+	  double dx = r * r - w * w * 0.25;
+	  if (dx <= 0) continue;
+	  else dx = sqrt(dx);
 	  interval cur {x - dx, x + dx, i};
 	  arrIntv.push_back(cur);
 	}
-      
+      if (debug) for (int i = 0; i < (int) arrIntv.size(); ++i)
+		   printf("%f, %f\n", arrIntv[i].left, arrIntv[i].right);
+      if (debug) cout << endl << "sorting....\n";
+      //sort the interval: left most first
       sort(arrIntv.begin(), arrIntv.end());
-      rightMost = 0.0;
-      lastRightMost = 0.0;
-      curId = 0;
-      feasible = true;
-      if (!res.empty()) res.clear();
-      for (int i = 0; i < n; ++i)
+      if (debug) for (int i = 0; i < (int) arrIntv.size(); ++i)
+		   printf("%f, %f\n", arrIntv[i].left, arrIntv[i].right);
+      if (debug) cout << endl << "DONE sorting....\n\n";
+      
+      vector<int> res; //number of minimum sprinklers need to be turned on
+      //compute here:
+      double left = 0.0;
+      double right = 0.0;
+      res.push_back(0);
+      int i;
+      int cnt = 1;
+      if (debug) printf("l = %d, n = %d, w = %d\n", l, n, w); 
+      for (i = 0; i < (int) arrIntv.size(); ++i)
 	{
-	  if (debug) cout << arrIntv[i].left <<  ", " << arrIntv[i].right << endl;
-	  if (i == 0)
+	  if (debug) cout << "i = " << i << ", " << arrIntv[i].left << ", " << arrIntv[i].right << endl;
+	  if(right >= l) break;
+	  if (arrIntv[i].left <= left) 
 	    {
-	      if (arrIntv[i].left > eps) //no sol
-		{
-		  feasible = false;
-		  break;
-		}
-	      else
-		{
-		  rightMost = arrIntv[i].right;
-		  lastRightMost = arrIntv[i].right;
-		  res.push_back(i);
-		  curId = i;
-		  if (debug) cout << "add this circle id:" << curId << endl;
-		  continue;
-		}
+	      right = max(right, arrIntv[i].right);
 	    }
-	  
-	  //cases (note to take care of extreme case first
-	  if (lastRightMost > l) //already cover -> found minimum sol 
-	    break;
-	  else if (rightMost + eps < arrIntv[i].left) //there is a gap -> no sol
+	  else
 	    {
-	      feasible = false;
-	      break;
-	    }
-	  else if (lastRightMost + eps < arrIntv[i].left) //there is no gap but this is a change point that we need to update the lastRightMost
-	    {
-	      lastRightMost = rightMost;
-	      res.push_back(curId);
-	      if (debug) cout << "add the circle id : " << curId << endl;
-	    }
-	  
-	  if (rightMost < arrIntv[i].right - eps) //if this is not a change point thant this could be a candidate
-	    {
-	      rightMost = arrIntv[i].right;
-	      curId = i;
-	    }
-	  
-	  if (i == n-1)
-	    {
-	      if (rightMost < l - eps)
-		feasible = false;
-	      else if (rightMost > lastRightMost + eps)
-		{
-		  lastRightMost = rightMost;
-		  res.push_back(curId);
-		  if (debug) cout << "add the circle id : " << curId << endl;
-		}
+	      if (right < arrIntv[i].left) //gap
+		    break;
+	      //else update left and right
+	      left = right;
+	      res.push_back(i);
+	      if (debug) cout << "add this i = " << i;
+	      cnt++;
+	      i--;
 	    }
 	}
-      if (feasible) printf("%zu\n", res.size());
-      else printf("%d\n", -1);
+      
+      if (right < l) printf("%d\n", -1);
+      //      else printf("%zu\n", res.size());
+      else printf("%d\n", cnt);
       if (debug) cout << "Done one case\n\n"; 
     }
   
