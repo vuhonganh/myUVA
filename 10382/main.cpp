@@ -45,7 +45,7 @@ int main()
       for (int i = 0; i < n; ++i)
 	{
 	  assert(scanf("%d %d", &x, &r) == 2);
-	  double dx = r * r - w * w * 0.25;
+	  double dx = (double)(r) * r - w * w * 0.25;
 	  if (dx <= 0) continue;
 	  else dx = sqrt(dx);
 	  interval cur {x - dx, x + dx, i};
