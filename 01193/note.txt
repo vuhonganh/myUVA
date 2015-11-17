@@ -1,0 +1,10 @@
+Problem is a greedy type after sorting
+The key point is to turn each island (one point in 2D) to an interval in which every rada that lies inside will cover this island. The interval is calculated by a simple geometry.  
+The second key point is to sort the interval follows its right-end point: further on the left of the right-end point, the better
+1) hence the scheme is:
+   a) read input, if there is an y-coordiante > d -> no solution
+   b) turn input to intervals, put them in an array
+   c) sort the array containing these intervals (farthest on the left-side of the right end)
+   d) start with the right-end point of the first interval
+   e) consult the intervals in the sorted array until find one interval which does not overlap (left-end of this interval > right-end of current interval)  
+   f) increment the count, and move to the right-end point of the interval above
