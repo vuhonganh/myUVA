@@ -48,7 +48,7 @@ int main()
 	  if (debug) printf("interVs[i].R = %d\n", interVs[i].R);
 	  if (debug) printf("curCovered = %d\n", curCovered);
 	  if (debug) printf("maxRight = %d\n", maxRight);
-	  while (i <= nbStas && interVs[i].L <= curCovered) //when there is increment index, SHOULD ALWAYS check if index possible
+	  while (i < nbStas && interVs[i].L <= curCovered) //when there is increment index, SHOULD ALWAYS check if index possible
 	    {
 	      maxRight = max(maxRight, interVs[i].R);
 	      ++i; 
