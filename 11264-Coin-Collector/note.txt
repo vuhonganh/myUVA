@@ -1,0 +1,7 @@
+//UVA 11264 Coin Collector problem:
+//Type: greedy type, need to write down and think a little bit
+//some fact:
+1) we can always get first coin C(1) and the maximum value coin C(n)
+2) Need to think in a dynamic programming fashion:
+   a) consider we have to withdraw S make the most out of C(1) -> C(i-1) coins, how about the coin C(i)?
+   b) we will get this coin if S + C(i) < C(i+1) and don't get it otherwise
