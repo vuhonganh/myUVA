@@ -1,0 +1,47 @@
+roadLen = 40
+nbStas = 5
+size of interval array is = 5, nbStas = 5
+interVs[i].L = -10
+interVs[i].R = 10
+curCovered = 0
+maxRight = 0
+continue with i = 1...
+continue with i = 2...
+update curCovered, increment result
+now res = 1
+interVs[i].L = 10
+interVs[i].R = 30
+curCovered = 20
+maxRight = 20
+continue with i = 3...
+continue with i = 4...
+update curCovered, increment result
+now res = 2
+3
+DONE ONE CASE
+
+roadLen = 40
+nbStas = 3
+size of interval array is = 3, nbStas = 3
+interVs[i].L = 0
+interVs[i].R = 20
+curCovered = 0
+maxRight = 0
+continue with i = 1...
+update curCovered, increment result
+now res = 1
+interVs[i].L = 8
+interVs[i].R = 28
+curCovered = 20
+maxRight = 20
+continue with i = 2...
+continue with i = 3...
+continue with i = 4...
+continue with i = 5...
+update curCovered, increment result
+now res = 2
+1
+DONE ONE CASE
+
+roadLen = 0
+nbStas = 0
