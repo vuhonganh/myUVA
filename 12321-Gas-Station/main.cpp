@@ -26,13 +26,13 @@ int main()
       if (debug) printf("roadLen = %d\n", roadLen);
       if (debug) printf("nbStas = %d\n", nbStas);
       if (roadLen == 0 && nbStas == 0) break;
-      vector<Interval> interVs;
+      vector<Interval> interVs(nbStas);
       int xi, ri;
       for (int i = 0; i < nbStas; ++i)
 	{
 	  assert(scanf("%d %d", &xi, &ri) == 2);
 	  Interval cur {xi -ri, xi + ri};
-	  interVs.push_back(cur);
+	  interVs[i] = cur;
 	}
       if (debug) printf("size of interval array is = %zu, nbStas = %d\n", interVs.size(), nbStas);
       if (!interVs.empty()) sort(interVs.begin(), interVs.end());
