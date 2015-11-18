@@ -1,0 +1,13 @@
+UVA problem 10026: Shoemaker's problem
+1) The problem is at the first glance is not trivial to understand: the time is in days, i.e.: each jobs take x days to finish, and each day, the shoemaker can 
+only do one job
+
+2) Some observations:
+   a) consider two jobs i and j: the order that we do i and j does not affect the cost of the other jobs, i.e. if we do i before j or j before i, it does not matter to the cost of the other jobs 
+   b) Consider two jobs i and j: which one should we finish first? Let's say Ti, Tj the time to finish and Di, Dj the cost of each delayed day of i and j respectively, we have this calculation:
+   c) suppose Ti/Di > Tj/Dj => Ti*Dj > Tj*Di => (Ti + Tj)*Dj + Ti*Di > (Ti + Tj)*Di + Tj*Dj
+   d) From the above formula, the cost for doing i first (the left expression) is higher than doing j first if Ti/Di > Tj/Dj
+
+SO, doing i first if Di*Tj > Dj*Ti
+
+The problem asks for a a correct order in case of ties, so we need to explicit the way to sort in order to have the less permuted order
