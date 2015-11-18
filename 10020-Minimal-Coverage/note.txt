@@ -1,0 +1,10 @@
+# UVA problem 10020: minimal coverage
+Type: greedy, interval covering
+
+1) Sort the input: the input is a set of interval, should sort it according to its left-end 
+
+2) We need to choose the minimal amount of interval that they will cover the segment [0, M] 
+
+3) take a current covering point (first at 0)
+   a) for every interval that left side is not greater than this covering point, the next covering point will be the maximal of the right-end of one of these intervals
+   b) update the covering point is the maximal value found above and repeat 
