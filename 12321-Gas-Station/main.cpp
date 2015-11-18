@@ -22,7 +22,7 @@ int main()
   int nbStas; //number of stations
   while (scanf("%d %d", &roadLen, &nbStas) == 2)
     {
-      bool debug = true;
+      bool debug = false;
       if (debug) printf("roadLen = %d\n", roadLen);
       if (debug) printf("nbStas = %d\n", nbStas);
       if (roadLen == 0 && nbStas == 0) break;
@@ -48,10 +48,10 @@ int main()
 	  if (debug) printf("interVs[i].R = %d\n", interVs[i].R);
 	  if (debug) printf("curCovered = %d\n", curCovered);
 	  if (debug) printf("maxRight = %d\n", maxRight);
-	  while (interVs[i].L <= curCovered)
+	  while (i <= nbStas && interVs[i].L <= curCovered) //when there is increment index, SHOULD ALWAYS check if index possible
 	    {
 	      maxRight = max(maxRight, interVs[i].R);
-	      ++i;
+	      ++i; 
 	      if (debug) printf("continue with i = %d...\n", i);
 
 	    }
