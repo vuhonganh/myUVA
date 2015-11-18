@@ -1,0 +1,5 @@
+//UVA 11389 Bus Driver: greedy type
+//because of the specific condition of this problem, it's not so difficult to solve
+//just need to sort two arrays: the morning route length and the evening route length
+//then, take the sum of two arrays with decreasing direction of evening route length
+//greedy idea: the best we can do is to make pair of the max value of evening route with the min value of the morning route
