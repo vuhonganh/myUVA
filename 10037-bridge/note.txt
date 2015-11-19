@@ -1,4 +1,16 @@
 UVA 10037 Bridge:
+NOTE about implementation: can use stringstream to keep output and then, calculate the result, print it out to screen than cout << stringstream_obj.str() as normal
+
+This will keep our code much cleaner than current version, however, don't have time now to rearrange code, just to note here
+
+#include <sstream>
+ostringstream os;
+os << "dec: " << 15 << " hex: " << std::hex << 15 << endl;
+cout<<os.str()<<endl;
+
+//result is: dec: 15 hex: f
+
+ALGORITHM
 this one is interesting problem based on quite simple logic
 let 'A' be the fastest member and 'B' second fastest
 let 'a' be the slowest member and 'b' second slowest
