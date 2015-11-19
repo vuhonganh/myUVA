@@ -1,0 +1,15 @@
+UVA 10037 Bridge:
+this one is interesting problem based on quite simple logic
+let 'A' be the fastest member and 'B' second fastest
+let 'a' be the slowest member and 'b' second slowest
+main problem is to get the slowest members (a and b) of the group to the other side, how can this be done?
+The fastest member goes back and forth (twice)
+The fastest member takes the slowest member across and comes back - time = a + A
+To take the two slowest - time = 2*A + a + b
+The two fastest members go, allowing the two slowest two to go together
+A and B go to the other side - time = B
+A goes back - time = A
+a and b cross - time = a
+B goes back - time = B
+time needed: 2*B + A + a
+So which method do we choose? Simply constructing an inequality: if (2*A + a + b < 2*B + A + a) the first is better; else second is better; for simplicity one can observe that 2*A + a + b < 2*B + A + a is the same as b + A < 2*B
