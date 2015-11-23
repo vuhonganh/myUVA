@@ -20,6 +20,24 @@ struct pairAB
   }
 };
 
+void test_empty_map_find()
+{
+  map<pairAB, int> maps;
+  map<pairAB, int>::iterator it;
+  pairAB p3{1, 3};
+  it = maps.find(p3);
+  if (it != maps.end())
+    (it->second)++;
+  else
+    maps.insert(make_pair(p3, 1));     	
+  
+  for (it = maps.begin(); it != maps.end(); ++it)
+    {
+      printf("%d, %d -> %d\n", (it->first).A, (it->first).B, it->second);
+    }
+
+}
+
 int main()
 {
   map<pairAB, int> maps;
@@ -71,5 +89,6 @@ int main()
     {
       printf("%d, %d -> %d\n", (it->first).A, (it->first).B, it->second);
     }
+  
   return 0;
 }
