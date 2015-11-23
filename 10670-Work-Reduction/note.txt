@@ -1,0 +1,5 @@
+//uva 10670 - Work Reduction: GREEDY type
+//while you can till halve the workload: if the price to half the workload is smaller than the price to do that same amount of work by doing unit by unit, then pay for price to half.
+
+//ONE NOTE: many times Wrong Answer due to the sort of Alphabetic in agence's name to break ties --> NEED TO PAY ATTENTION WHILE OVERWRITING operator<
+
