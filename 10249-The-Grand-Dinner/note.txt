@@ -1,0 +1,13 @@
+UVA 10249: THE GRAND DINNER
+
+This problem deserve one note to describe about it. At the first glance, this seems to be an easy greedy problem. However, it's not. 
+
+Here is the schedule how I solve this:
+1) sort the team according to its number of members: in descending order, team is a struct that keeps id of this team.
+2) use set of STL to store the table variable: implement its operator< according to its capacity: in descending order, table is also a struct that keeps its own id
+3) take care of base case: no team, no table, trivially infeasible
+4a) for each team: (after sort, hence start with the largest team): assign for it one place in each table (start at the biggest capacity table). 
+4b) AFTER DONE assigning for one team, remove all the tables used for this team, update its capacity and readd its into the set. THIS step is critical, many solutions found on the internet did not cover this. We can try with the two first test cases in the file input (in this same folder) to find how this step is needed.
+5) continue until found feasible or unfeasible
+
+To sum up, one thing need to remember, is that for each team, we need to assign for each member of it the tables that have biggest capacity at that moment. Many solution only sort the tables only once (at the beginning), and use it to assign for all the teams without ordering the priority to assign. 
