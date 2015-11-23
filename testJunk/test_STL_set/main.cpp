@@ -14,7 +14,7 @@ struct table
   }
 };
 
-int main()
+void test_intSet()
 {
   set<int> mySet;
   set<int>::iterator it;
@@ -26,7 +26,10 @@ int main()
   for (it = mySet.begin(); it != mySet.end(); ++it)
     cout << *it << " ";
   cout << endl;
+}
 
+void test_struct_multiset()
+{
   multiset<table> S;
   table cur1 {1, 9};
   table cur2 {3, 5};
@@ -41,6 +44,32 @@ int main()
   for (itS = S.begin(); itS != S.end(); ++itS)
     cout << (*itS).id << "-" << (*itS).cap << ", ";
   cout << endl;
-    
+}
+
+struct pairAB
+{
+  int A;
+  int B;
+  bool operator< (const pairAB &a) const
+  {
+    return A < a.A;
+  }
+};
+
+int main()
+{
+  //test set with struct having equal values (to find out if set consider them as the same)
+  set<pairAB> pairs;
+  pairAB p1 {1, 3};
+  pairAB p2 {3, 1};
+  pairAB p3 {1, 3};
+  pairs.insert(p1);
+  pairs.insert(p2);
+  pairs.insert(p3);
+  set<pairAB>::iterator it;
+  for (it = pairs.begin(); it != pairs.end(); ++it)
+    {
+      cout << (*it).A << ", " << (*it).B << endl;
+    }
   return 0;
 }
