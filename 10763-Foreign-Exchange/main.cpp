@@ -5,9 +5,9 @@
 
 #include <cstdio>
 #include <map>
+#include <cassert>
 
 using namespace std;
-
 
 struct pairAB
 {
@@ -27,8 +27,58 @@ struct pairAB
 };
 
 
-int main
+int main()
 {
+  int n; //number candidate
+  map<pairAB, int> maps;
+  map<pairAB, int>::iterator it;
+  int a, b;
+  while (scanf("%d", &n) == 1 && n != 0)
+    {
+      if (!maps.empty()) maps.clear();
+      for (int i = 0; i < n; ++i)
+	{
+	  assert(scanf("%d %d", &a, &b) == 2);
+	  if (a < b)
+	    {
+	      pairAB cur{a, b};
+	      it = maps.find(cur);
+	      if (it != maps.end())
+		{
+		  (it->second)++;
+		}
+	      else
+		{
+		  maps.insert(make_pair(cur, 1));
+		}
+	    }
+	  else //a > b -> swap and find
+	    {
+	      pairAB cur{b, a};
+	      it = maps.find(cur);
+	      if (it != maps.end())
+		{
+		  (it->second)--;
+		}
+	      else
+		{
+		  maps.insert(make_pair(cur, -1));
+		}
+	    
+	    }
+	}
+      bool possible = true;
+      for (it = maps.begin(); it != maps.end(); ++it)
+	{
+	  if (it->second != 0)
+	    {
+	      possible = false;
+	      break;
+	    }
+	}
+      if (possible) printf("YES\n");
+      else printf("NO\n");
+    }
   
   return 0;
 }
