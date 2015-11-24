@@ -1,0 +1,11 @@
+UVA 10763 Foreign Exchange problem
+Type: greedy but not that simple
+
+This is another problem that I found many people got Accepted however their algorithm is not totally true.
+First this seem to be a greedy problem involving sorting, but if we do like that, it's not true. Because, the problem state that: if a student wants to go from A -> B, there MUST BE ANOTHER who wants go from B -> A. This is a mapping one-one, from pair A,B to pair B,A, and not just compair the set of original and the set of destination. (many solution i found online only compaired these 2 sets)
+
+Which I do is not related to sorting, because this does not help. What i do is to use set, map each pair to an integer. if A < B it maps the key (A,B) to 1 or increase the value by one, if A > B, it finds if pair (B,A) already exists, if yes decrease its value by one, if not, create it with value -1. After all, iterate all the map container and check if all value is 0, then it's feasible, if exists non-zero value then it's unfeasible. 
+
+Another key point is to correctly implement bool operator< for the struct. This helps map STL use find() function. Note that, STL consider that 2 object are equal by this: a == b if-and-only-if !(a < b) && !(b < a), in other word: a equal b if and only if a is not smaller than b and b is not smaller than a.
+
+ 
