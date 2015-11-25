@@ -1,0 +1,2 @@
+This problem belongs to type Cummulative Sum before solving
+The anotherSol.cpp use a clever way to use cummulative sum and Kadane algorithm (a little bit similar to greedy) hence reduce the time complexity to O(n^3) instead of O(n^4) solution given in main.cpp file
