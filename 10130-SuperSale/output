@@ -1,0 +1,25 @@
+id_obj and cur_capa in valid range: id_obj = 2, cur_capa = 26
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+id_obj and cur_capa in valid range: id_obj = 1, cur_capa = 2
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+id_obj and cur_capa in valid range: id_obj = 0, cur_capa = 2
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+for id_obj = 0, cur_capa = 2, ans = 72
+for id_obj = 1, cur_capa = 2, ans = 72
+id_obj and cur_capa in valid range: id_obj = 1, cur_capa = 26
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+id_obj and cur_capa in valid range: id_obj = 0, cur_capa = 3
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+for id_obj = 0, cur_capa = 3, ans = 72
+id_obj and cur_capa in valid range: id_obj = 0, cur_capa = 26
+current value of ans = memos[id_obj][cur_capa] = 0
+go search for ans..........
+for id_obj = 0, cur_capa = 26, ans = 72
+for id_obj = 1, cur_capa = 26, ans = 116
+for id_obj = 2, cur_capa = 26, ans = 116
+116
