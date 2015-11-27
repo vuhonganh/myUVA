@@ -1,11 +1,11 @@
 #include <cstdio>
-
+#include <cstring>
 int multi2(int a)
 {
   return 2 * a;
 }
 
-int main()
+void testAr1D()
 {
   printf("\nTest ar1D with length is a defined variable in scope\n");
   int nDeclared = 5;
@@ -46,8 +46,12 @@ int main()
       printf("%d ", ar3[i]);
       if (i == nScanned - 1) printf("\n");
     }
-  printf("\nTest ar2D with lengths are a scanned variables get from scanf()\n");
+}
 
+void testAr2D()
+{
+  printf("\nTest ar2D with lengths are a scanned variables get from scanf()\n");
+  
   int nbScanned1;
   printf("enter one positive integer for the height: ");
   scanf("%d", &nbScanned1);
@@ -72,6 +76,31 @@ int main()
 	}
       printf("\n");
     }
-   
+}
+
+void testAr2D_init()
+{
+  int h, w;
+  printf("enter the size of height: "); scanf("%d", &h);
+  printf("enter the size of width: "); scanf("%d", &w);
+  printf("try to init with syntax int ar[h][w] = {1}\n");
+  printf("int ar[h][w] = {1}; WILL NOT COMPILE so i turned it to a printf\n");
+  int ar[h][w];
+  //memset(ar, -1, sizeof(int) * h * (w));
+  memset(ar, -1, sizeof(ar));
+  printf("NEED memset instead, there are two ways: sizeof(whole_obj) or sizeof(type_obj * dimensions)\n");
+  for (int i = 0; i < h; ++i)
+    {
+      for (int j = 0; j < w; ++j)
+	{
+	  printf("%d ", ar[i][j]);
+	}
+      printf("\n");
+    }
+}
+
+int main()
+{
+  testAr2D_init();
   return 0;
 }
