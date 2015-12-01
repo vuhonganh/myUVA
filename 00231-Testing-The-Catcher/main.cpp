@@ -1,3 +1,11 @@
+//UVA 231 Testing the Catcher: Longest Decreasing Sequence (straight forward)
+//LIS[i] = size of the longest decreasing sequence from beginning to index i
+//I was deconcentrated so I wrote LIS instead of LDS
+
+/* The algorithm of LIS
+for j = 0->(i-1), if (a[i] > a[j]) LIS[i] = max(LIS[j]) + 1;
+*/
+
 #include <vector>
 #include <cstdio>
 #include <cassert>
