@@ -1,0 +1,81 @@
+minW[0] = 3, maxW[0] = 3, arr[0] = 3
+ i = 1, memo[i] = -1
+ i = 0, memo[i] = 1
+ lenMax = 2, idxMax = 0
+ maxW[idxMaw] = 3, minW[idxMax] = 3
+i = 1, arrW[i] = 8
+DONE ONE CALCUL
+
+ i = 2, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 1, memo[i] = 2
+ lenMax = 3, idxMax = 1
+ maxW[idxMaw] = 8, minW[idxMax] = 3
+i = 2, arrW[i] = 1
+DONE ONE CALCUL
+
+//WRONG BELOW: below show only case (3, 5), however, (5, 8) or (1, 5) are also possible, 
+ i = 3, memo[i] = -1
+ i = 0, memo[i] = 1
+ lenMax = 2, idxMax = 0
+ maxW[idxMaw] = 3, minW[idxMax] = 3
+i = 3, arrW[i] = 5
+DONE ONE CALCUL
+
+ i = 4, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 1, memo[i] = 2
+ i = 2, memo[i] = 3
+ i = 3, memo[i] = 2
+ lenMax = 4, idxMax = 2
+ maxW[idxMaw] = 8, minW[idxMax] = 1
+i = 4, arrW[i] = 10
+DONE ONE CALCUL
+
+ i = 5, memo[i] = -1
+ i = 0, memo[i] = 1
+ lenMax = 2, idxMax = 0
+ maxW[idxMaw] = 3, minW[idxMax] = 3
+i = 5, arrW[i] = 4
+DONE ONE CALCUL
+
+ i = 6, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 1, memo[i] = 2
+ i = 2, memo[i] = 3
+ i = 3, memo[i] = 2
+ i = 5, memo[i] = 2
+ lenMax = 4, idxMax = 2
+ maxW[idxMaw] = 8, minW[idxMax] = 1
+i = 6, arrW[i] = 9
+DONE ONE CALCUL
+
+ i = 7, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 1, memo[i] = 2
+ i = 3, memo[i] = 2
+ i = 5, memo[i] = 2
+ lenMax = 3, idxMax = 1
+ maxW[idxMaw] = 8, minW[idxMax] = 3
+i = 7, arrW[i] = 2
+DONE ONE CALCUL
+
+ i = 8, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 3, memo[i] = 2
+ i = 5, memo[i] = 2
+ lenMax = 3, idxMax = 3
+ maxW[idxMaw] = 5, minW[idxMax] = 3
+i = 8, arrW[i] = 7
+DONE ONE CALCUL
+
+ i = 9, memo[i] = -1
+ i = 0, memo[i] = 1
+ i = 3, memo[i] = 2
+ i = 5, memo[i] = 2
+ lenMax = 3, idxMax = 3
+ maxW[idxMaw] = 5, minW[idxMax] = 3
+i = 9, arrW[i] = 6
+DONE ONE CALCUL
+
+4
