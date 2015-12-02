@@ -1,6 +1,7 @@
 //UVA 11456 TrainSorting
-//Below code is not correct because it does not cover all the ties
-//it takes only the configuration of the first tie, hence leads to wrong solutions in complicated test case
+//another type of Longest Increasing/Decreasing Sequence
+//Here the problem is a little bit different, is that, STARTING AT SOME INDEX i, find the LIS and LDS FROM THIS INDEX i
+//Note that in this particular problem, a trick is that we can use a reverse FOR loop helps us to save some space
 
 #include <cstdio>
 #include <vector>
@@ -8,52 +9,9 @@
 
 using namespace std;
 
-vector<int> memo;
 vector<int> arrW;
-vector<int> minW;
-vector<int> maxW;
-bool debug = true;
-int maxLenAt(int i)
-{
-  //if (i < 0) return 0;
-  if (debug) printf(" i = %d, memo[i] = %d\n", i, memo[i]);
-  int &ans = memo[i];
-  if (ans != -1) return ans;
-  
-  int idxMax = 0;
-  int lenMax = 0;
-  for (int j = 0; j < i; ++j)
-    {
-      if (arrW[i] > maxW[j] || arrW[i] < minW[j])
-	{
-	  if (lenMax < (maxLenAt(j) + 1))
-	    {
-	      idxMax = j;
-	      lenMax = memo[j] + 1;
-	    }
-	}
-    }
-  if (debug) printf(" lenMax = %d, idxMax = %d\n", lenMax, idxMax);
-  if (debug) printf(" maxW[idxMaw] = %d, minW[idxMax] = %d\n",maxW[idxMax], minW[idxMax]);
-  if (debug) printf("i = %d, arrW[i] = %d\n", i, arrW[i]);
-  ans = lenMax;
-  if (arrW[i] > maxW[idxMax]) 
-    {
-      maxW[i] = arrW[i];
-      minW[i] = minW[idxMax];
-    }
-  else if (arrW[i] < minW[idxMax])
-    {
-      maxW[i] = maxW[idxMax];
-      minW[i] = arrW[i];
-    }
-  else
-    {
-      printf("something is fucking wrong here, because it always exist idxMax = 0 to satisfy if and else if above\n");
-    }
-  if (debug) printf("DONE ONE CALCUL\n\n");
-  return ans;
-}
+vector<int> LIS_from_idx;
+vector<int> LDS_from_idx;
 
 int main()
 {
@@ -74,23 +32,28 @@ int main()
 	  //done reading
 	  continue;
 	}
-      memo.assign(n, -1);
+
       arrW.assign(n, 0);
-      minW.assign(n, 0);
-      maxW.assign(n, 0);
+      LIS_from_idx.assign(n, 1);
+      LDS_from_idx.assign(n, 1);
       for (int i = 0; i < n; ++i)
 	{
 	  assert(scanf("%d", &arrW[i]) == 1);
 	}
-      minW[0] = maxW[0] = arrW[0];
-      if (debug) printf("minW[0] = %d, maxW[0] = %d, arr[0] = %d\n", minW[0], maxW[0], arrW[0]);
-      memo[0] = 1;
-      int result = 0;
-      for (int i = 1; i < n; ++i)
+      for (int i = n - 1; i > -1; --i)
 	{
-	  result = max(result, maxLenAt(i));
+	  for (int j = i + 1; j < n; ++j)
+	    {
+	      if (arrW[j] > arrW[i]) LIS_from_idx[i] = max(LIS_from_idx[j] + 1, LIS_from_idx[i]);
+	      else LDS_from_idx[i] = max(LDS_from_idx[j] + 1, LDS_from_idx[i]); 
+	    }
 	}
-      printf("%d\n", result);
+      int res = 0;
+      for (int i = 0; i < n; ++i)
+	{
+	  res = max(res, LIS_from_idx[i] + LDS_from_idx[i] - 1);
+	}
+      printf("%d\n", res);
     }
   return 0;
 }
