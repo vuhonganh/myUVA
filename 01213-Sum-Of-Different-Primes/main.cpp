@@ -48,6 +48,23 @@ long nbSumOfDifPrimes(int idx, int remainN, int remainK, vector<int> &primes, ve
   return ans;
 }
 
+void bottomUp(int n, int k, vector<int> &primes, vector<vector<long> > &memoBottomUp)
+{
+  //if (n == 0 && k == 0) return 1;
+  long &ans = memoBottomUp[n][k];
+  if (ans != 0) return;
+  for (size_t i = 0; i < primes.size(); ++i)
+    {
+      for (int cur = n; cur >= primes[i]; --cur)
+	{
+	  for (int j = 1; j <= k; j++)
+	    {
+	      memoBottomUp[cur][j] += memoBottomUp[cur - primes[i]][j - 1];
+	    }
+	}
+    }
+}
+
 int main()
 {
   int n, k;
@@ -56,8 +73,12 @@ int main()
   while (scanf("%d %d", &n, &k) == 2)
     {
       if (n == 0 && k == 0) break;
-      vector< vector< vector<long> > > memo(nbPrimes, vector< vector<long> >(n + 1, vector<long>(k + 1, -1)));
-      printf("%ld\n", nbSumOfDifPrimes(0, n, k, primes, memo));
+      //vector< vector< vector<long> > > memo(nbPrimes, vector< vector<long> >(n + 1, vector<long>(k + 1, -1)));
+      //printf("%ld\n", nbSumOfDifPrimes(0, n, k, primes, memo));
+      vector<vector<long> > memoBottomUp(1121, vector<long>(k + 1, 0));
+      memoBottomUp[0][0] = 1;
+      bottomUp(n, k, primes, memoBottomUp);
+      printf("%ld\n", memoBottomUp[n][k]); 
     }
   
   return 0;
