@@ -5,7 +5,41 @@
 #include <cassert>
 #include <vector>
 using namespace std;
-bool debug = true;
+bool debug = false;
+
+int nbCarOneSide(int i, int remainLen, int &idxOver, vector<int> &lenCars, vector<vector<int> > &memo, vector<bool> &atThisSide, bool firstTime, int &nbCars)
+{
+  if (firstTime || !atThisSide[i])
+    {
+      if (i >= idxOver || i == (int) lenCars.size()) return 0;
+      if (remainLen < 0) return 0;
+      int &ans = memo[i][remainLen];
+      if (ans != -1) return ans;
+      
+      if (debug) printf("i = %d, remainLen = %d, firstTime = %d\n", i, remainLen, (int)firstTime);
+      
+      int nbCarPutThisCar_i = 0;
+      if (remainLen >= lenCars[i]) nbCarPutThisCar_i = lenCars[i] + nbCarOneSide(i + 1, remainLen - lenCars[i], idxOver, lenCars, memo, atThisSide, firstTime, nbCars);
+      int nbCarDontPutThisCar_i = nbCarOneSide(i + 1, remainLen, idxOver, lenCars, memo, atThisSide, firstTime, nbCars);
+     
+      if (nbCarPutThisCar_i > nbCarDontPutThisCar_i)
+	{
+	  if (firstTime) atThisSide[i] = true; //change it only the first time
+	  ans = nbCarPutThisCar_i;
+	  nbCars++;
+	}
+      else
+	{
+	  if (firstTime) atThisSide[i] = false; //change it only the first time
+	  ans = nbCarDontPutThisCar_i;
+	  nbCars--;
+	}
+      if (debug) printf("if put this car index i = %d, nbCar = %d, else nbCarDontPutThisCar = %d\n", i, nbCarPutThisCar_i, nbCarDontPutThisCar_i);
+      if (debug) if (firstTime) printf("index i = %d, atThisSide[i] = %d\n", i, (int) atThisSide[i]);
+      return ans;
+    }
+  else return nbCarOneSide(i + 1, remainLen, idxOver, lenCars, memo, atThisSide, firstTime, nbCars);
+}
 
 int nbCar(int i, int remL, int remR, vector<int> &lenCars, vector<vector<vector<int> > > &memo, vector<bool> &atLeft)
 {
@@ -41,23 +75,32 @@ int main()
       LenFerry *= 100; //turn meter to centimeter
       vector<int> lenCars;
       int l;
+      int idxOver = 0;
+      int sum = 0;
       assert(scanf("%d", &l) == 1);
       do
 	{
 	  lenCars.push_back(l);
+	  sum += l;
+	  if (sum <= 2 * LenFerry) idxOver++;
 	  assert(scanf("%d", &l) == 1);
 	}
       while (l != 0);
-      if (debug) printf("read Input OK\n");
-      vector<vector<vector<int> > >memo(lenCars.size(), vector<vector<int> >(LenFerry + 1, vector<int>(LenFerry + 1, -1)));
-      //int memo[7][2500][2500];
-      vector<bool> atLeft(lenCars.size(), false);
-      if (debug) printf("before compute OK\n");
-      int nbCarCanPut = nbCar(0, LenFerry, LenFerry, lenCars, memo, atLeft);
-      printf("%d\n", nbCarCanPut);
-      for (int i = 0; i < nbCarCanPut; ++i)
+      if (debug) printf("idxOver = %d\n", idxOver);
+      vector<bool> atThisSide(lenCars.size(), false);
+      vector<vector<int> > memo(lenCars.size(), vector<int>(LenFerry + 1, -1));
+      vector<vector<int> > memo2(lenCars.size(), vector<int>(LenFerry + 1, -1));
+      int nbcar1 = 0;
+      int nbcar2 = 0;
+      int nbCarFirstTime = nbCarOneSide(0, LenFerry, idxOver, lenCars, memo, atThisSide, true, nbcar1);
+      int nbCarSecondTime = nbCarOneSide(0, LenFerry, idxOver, lenCars, memo2, atThisSide, false, nbcar2);
+      
+      //int nbCarTotal = nbCarFirstTime + nbCarSecondTime;
+      int nbCarTotal = nbcar1 + nbcar2;
+      printf("%d\n", nbCarTotal);
+      for (int i = 0; i < nbCarTotal; ++i)
 	{
-	  if (atLeft[i]) printf("port\n");
+	  if (atThisSide[i]) printf("port\n");
 	  else printf("starboard\n");
 	}
       if (nbCase) printf("\n");
