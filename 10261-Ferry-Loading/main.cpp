@@ -1,3 +1,11 @@
+//UVA 10261: Ferry Loading
+//First, only add the cars until the sum of their length is not over 2*ferry_length, because the next cars can not be loaded
+//Then, knapsack one the first side of the ferry, max criteria is the max length possible that this side can add
+//After that, add the other cars (that have not been added to the first side) to the second side until it not exceed the length of ferry
+//This is dp knapsack for first side + greedy thinking for the second side. One can raise with a question like: how about if first side load car 1, 2, 6 and second side load 3, 4 only due to some specific lengths. So the algo is wrong because we load 6-th car but skip the 5-th, this is against the statement
+//I'll prove that this can not happen: the first side because of using DP knapsack, so it's the max length we can make from the set of cars. It means length_first_side > sum_of_the_other_lengths_of_remain_cars because sum of these 2 lengths are smaller than 2*ferry_length, so the sum of the other lengths of remain cars will always be smaller than ferry_length -> the remain cars are always loaded in the second side
+
+
 #include <cstdio>
 #include <cassert>
 #include <vector>
