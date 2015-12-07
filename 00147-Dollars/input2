@@ -1,0 +1,3 @@
+285.65
+0.00
+#interesting case when 285.65 turn to 28565.00 and (int) 28565.00 returns 28564 which is the result of truncating while casting to integer of the compiler, so always need to add 0.5 before cast to (int)
