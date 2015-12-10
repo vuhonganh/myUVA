@@ -14,7 +14,6 @@ int main()
   int setNb = 1;
   while (scanf("%d", &n) == 1 && n != 0)
     {
-      if (setNb != 1) printf("\n");
       heights.assign(n, 0);
       int sum = 0;
       for (int i = 0; i < n; ++i)
@@ -29,7 +28,7 @@ int main()
 	  nbMove += abs(average - heights[i]);
 	}
       nbMove /= 2; //the real work is only this value
-      printf("Set #%d\nThe minimum number of moves is %d.\n", setNb++, nbMove);
+      printf("Set #%d\nThe minimum number of moves is %d.\n\n", setNb++, nbMove);
     }
   
   return 0;
