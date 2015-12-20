@@ -1,5 +1,5 @@
 //uva 10858 Unique Factorization
-//Type: array manipulation, stack use, tricky to implement, need recursive technique
+//Type: array manipulation, stack style, here deque is used because it supports more operators than stack (like []operator ), tricky to implement, need recursive technique
 
 #include <cstdio>
 #include <cassert>
