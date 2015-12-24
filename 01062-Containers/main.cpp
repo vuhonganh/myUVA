@@ -11,35 +11,28 @@ int main()
 {
   string line;
   int caseNb = 1;
+  vector<char> charAtTops;
   while (getline(cin, line))
     {
       if (line == "end") break;
-      vector<stack<char> >arrStacks;
-      stack<char> firstStack;
-      firstStack.push(line[0]);
-      arrStacks.push_back(firstStack);
+      charAtTops.clear();
+      charAtTops.push_back(line[0]);
       for (size_t i = 1; i < line.length(); ++i)
 	{
 	  char c = line[i];
-	  //for each stack in the array of stack, try if this stack can add this value or add a new stack for this
 	  bool createNew = true;
-	  for (size_t j = 0; j < arrStacks.size(); ++j)
+	  for (size_t j = 0; j < charAtTops.size(); ++j)
 	    {
-	      if (c <= arrStacks[j].top())
+	      if (c <= charAtTops[j]) 
 		{
-		  arrStacks[j].push(c);
+		  charAtTops[j] = c;
 		  createNew = false;
 		  break;
 		}
 	    }
-	  if (createNew) 
-	    {
-	      stack<char> newStack;
-	      newStack.push(c);
-	      arrStacks.push_back(newStack);
-	    }
+	  if (createNew) charAtTops.push_back(c);
 	}
-      printf("Case %d: %zd\n", caseNb++, arrStacks.size());
+      printf("Case %d: %zd\n", caseNb++, charAtTops.size());
     }
   
   return 0;
