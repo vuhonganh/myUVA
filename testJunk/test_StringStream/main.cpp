@@ -25,5 +25,23 @@ int main()
   cout << val3 << endl;
   cout << status << endl;
 
+  string line3 = "1 A 0:50 N";
+  buffer.str(line3);
+  int teamNb, hour, minute;
+  char probLetter;
+  buffer >> teamNb >> probLetter;
+  // buffer >> hour >> minute >> status;
+  buffer >> hour;
+  char twodot;
+  buffer >> twodot;
+  buffer >> minute;
+  buffer >> status;
+  cout << teamNb << endl;
+  cout << probLetter << endl;
+  cout << hour << endl;
+  cout << twodot << endl;
+  cout << minute << endl; 
+  cout << status << endl;
+
   return 0;
 }
