@@ -27,6 +27,7 @@ Now, we can see, the problem turns to a 'finding the LCS' problem
 
 /*
   LCS: ar1[idx_0, ..., idx_i, ...], ar2[idx_0, ..., idx_j, ...] 
+  LCS[i][j] = longest common subsequence found when compare ar1[0:i] and ar2[0:j] // note that LCS does not need to be consecutive
   memo[i][j] = (ar1[i] == ar2[j]) ? (memo[i-1][j-1] + 1) : max(memo[i-1][j], memo[i][j-1])
   
 */
